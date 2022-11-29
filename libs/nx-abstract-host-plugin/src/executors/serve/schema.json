@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "version": 2,
+    "cli": "nx",
+    "title": "Abstract host executor",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "target": {
+            "type": "string",
+            "description": "What target use to serve your application (default is serve)"
+        },
+        "mock": {
+            "type": "string",
+            "description": "Path to mock file"
+        },
+        "apiParam": {
+            "type": "string",
+            "description": "Name of API parameter in window"
+        },
+        "port": {
+            "type": "number",
+            "description": "Port for host application"
+        },
+        "banner": {
+            "type": "boolean",
+            "description": "Show debug banner on host application"
+        }
+    },
+    "required": ["mock"]
+}

@@ -1,0 +1,31 @@
+.demo {
+    font: 1em "Fira Sans", sans-serif;
+    width: 360px;
+    margin: 2em auto;
+    min-height: 185px;
+    padding: 1em 3.5em 2em;
+    border-radius: 6px;
+    border: 1px solid #cdcdcd;
+    box-shadow: 2px 2px 2px 0 bisque;
+
+    p {
+        line-height: 1.5;
+        color: #494949;
+    }
+
+    span {
+        background-color: bisque;
+    }
+
+    button {
+        cursor: pointer;
+        border-radius: 4px;
+        padding: 4px 8px;
+        border: 1px solid black;
+        color: black;
+        background-color: bisque;
+        &:hover {
+            background-color: #ffdc9b;
+        }
+    }
+}

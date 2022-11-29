@@ -1,0 +1,12 @@
+<div class="demo">
+    <h2>Remote application</h2>
+    <p>It's a child application that would be embedded into abstract host application provided by NX executor.</p>
+
+    <ng-container *ngIf="(text$ | async) as text; else button">
+        <span>{{ text }}</span>
+    </ng-container>
+
+    <ng-template #button>
+        <button (click)="click()">Get Data!</button>
+    </ng-template>
+</div>

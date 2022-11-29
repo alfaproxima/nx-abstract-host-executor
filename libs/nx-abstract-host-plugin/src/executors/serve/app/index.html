@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" >
+    <title>Abstract Host</title>
+    <base href="/" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <link rel="icon" type="image/x-icon" href="favicon.ico" >
+</head>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .abstract-host-container {
+        width: 100%;
+    }
+
+    h3.abstract-host-header {
+        font: 0.9em "Fira Sans", sans-serif;
+        color: #494949;
+        text-align: center;
+        margin-bottom: 8px;
+        display: none;
+    }
+
+    h3.abstract-host-header.visible {
+        display: block;
+    }
+
+</style>
+<body>
+<div class="abstract-host-container">
+    <h3 class="abstract-host-header">running application: <span class="ahc-appname">demo</span></h3>
+    <div class="ahc-outlet" id="ahc-outlet" data-url="http://localhost:4200"></div>
+</div>
+
+<script id="embed">
+    const outlet = document.getElementById('ahc-outlet');
+    const url = outlet.getAttribute('data-url');
+
+    fetch(url)
+        .then(response => response.text())
+        .then(content => prepare(content))
+        .then(content => {
+            outlet.innerHTML = content;
+            nodeScriptReplace(outlet);
+        })
+        .catch( err => console.error('Could not get remote application, ', err));
+
+    function prepare(content) {
+        return content.replace(/(src|href)="(?:[^"\/]*\/)*([^"]+)"/gm, `src="${url}/$2"`);
+    }
+
+    function nodeScriptReplace(node) {
+        if ( nodeScriptIs(node) === true ) {
+            node.parentNode.replaceChild( nodeScriptClone(node) , node );
+        }
+        else {
+            let i = -1, children = node.childNodes;
+            while ( ++i < children.length ) {
+                nodeScriptReplace( children[i] );
+            }
+        }
+
+        return node;
+    }
+
+    function nodeScriptClone(node){
+        let script  = document.createElement("script");
+        script.text = node.innerHTML;
+
+        let i = -1, attrs = node.attributes, attr;
+        while ( ++i < attrs.length ) {
+            script.setAttribute( (attr = attrs[i]).name, attr.value );
+        }
+        return script;
+    }
+
+    function nodeScriptIs(node) {
+        return node.tagName === 'SCRIPT';
+    }
+</script>
+</body>
+</html>

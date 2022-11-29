@@ -1,0 +1,10 @@
+{
+    "name": "@tools/nx-abstract-host-plugin",
+    "version": "0.0.2",
+    "main": "src/index.js",
+    "generators": "./generators.json",
+    "executors": "./executors.json",
+    "devDependencies": {
+        "html-webpack-plugin": "^5.5.0"
+    }
+}
